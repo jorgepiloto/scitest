@@ -29,6 +29,7 @@
 #define CYAN        "\x1b[36m"
 #define GRAY        "\x1b[37m"
 
+
 /**
  * Message collection
  */
@@ -44,14 +45,14 @@ int TOTAL = 0;
 
 
 /**
- * Assertion macro for comparing integers
+ * Assertion macro for comparing equal integers 
  */
 #define ASSERT_INT_EQUAL(actual, desired) do {   \
     if (actual == desired) {               \
         MSG_OK; PASSED++; TOTAL++;         \
     } else {                               \
         MSG_FAIL;                          \
-        printf("Actual: %d\nExpected: %d\n\n", actual, desired); \
+        printf("Actual: %d\tExpected: %d\n\n", actual, desired); \
         FAILED++; TOTAL++;                 \
     }                                      \
     } while (0)
@@ -65,14 +66,14 @@ int TOTAL = 0;
         MSG_OK; PASSED++; TOTAL++;         \
     } else {                               \
         MSG_FAIL;                          \
-        printf("Actual: %d\nExpected: %d\n\n", actual, desired); \
+        printf("Actual: %d\tExpected: %d\n\n", actual, desired); \
         FAILED++; TOTAL++;                 \
     }                                      \
     } while (0) 
 
 
 /**
- * Asserion macro for comparing two float values
+ * Asserion macro for comparing two equal floats
  */
 #define ASSERT_FLOAT_EQUAL(actual, desired, tol) do {   \
     if (fabs(actual - desired) <= tol) {               \
@@ -83,6 +84,62 @@ int TOTAL = 0;
         FAILED++; TOTAL++;                 \
     }                                      \
     } while (0) 
+
+
+/**
+ * Asserion macro for comparing two different floats
+ */
+#define ASSERT_FLOAT_NOT_EQUAL(actual, desired, tol) do {   \
+    if (fabs(actual - desired) >= tol) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %f\tExpected: %f\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0) 
+
+
+/**
+ * Asserion macro for comparing two equal doubles
+ */
+#define ASSERT_DOUBLE_EQUAL(actual, desired, tol) do {   \
+    if (dabs(actual - desired) <= tol) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %lf\tExpected: %lf\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0) 
+
+
+/**
+ * Asserion macro for comparing two different doubles
+ */
+#define ASSERT_DOUBLE_NOT_EQUAL(actual, desired, tol) do {   \
+    if (dabs(actual - desired) >= tol) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %lf\tExpected: %lf\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0) 
+
+
+/**
+ * Assertion macro for comparing two strings
+ */
+#define ASSERT_STRING_EQUAL(actual, desired) do {\
+    if (actual == desired) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %s\tExpected: %s\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0)
 
 
 /**
@@ -98,6 +155,14 @@ int TOTAL = 0;
  * Abosulte value for a float quantity
  */
 float fabs(float a) {
+    return a < 0 ? -1 * a : a;
+}
+
+
+/**
+ * Absolute value for a double quantity
+ */
+double dabs(double a) {
     return a < 0 ? -1 * a : a;
 }
 
