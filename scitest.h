@@ -58,12 +58,48 @@ int TOTAL = 0;
 
 
 /**
+ * Asserion macro for comparing different integers
+ */
+#define ASSERT_INT_NOT_EQUAL(actual, desired) do {   \
+    if (actual != desired) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %d\nExpected: %d\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0) 
+
+
+/**
+ * Asserion macro for comparing two float values
+ */
+#define ASSERT_FLOAT_EQUAL(actual, desired, tol) do {   \
+    if (fabs(actual - desired) <= tol) {               \
+        MSG_OK; PASSED++; TOTAL++;         \
+    } else {                               \
+        MSG_FAIL;                          \
+        printf("Actual: %f\nExpected: %f\n\n", actual, desired); \
+        FAILED++; TOTAL++;                 \
+    }                                      \
+    } while (0) 
+
+
+/**
  * Macro for running tests and avoiding function pointers
  */
 #define RUN_TEST(test_name, test_func) do { \
     printf("%s...  ", test_name);           \
     test_func();                            \
     } while (0)
+
+
+/**
+ * Abosulte value for a float quantity
+ */
+float fabs(float a) {
+    return a < 0 ? -1 * a : a;
+}
 
 
 /**
