@@ -14,6 +14,7 @@
 
 
 #include <stdio.h>
+#include <string.h>
 #include <sys/ioctl.h>
 
 
@@ -132,7 +133,7 @@ int TOTAL = 0;
  * Assertion macro for comparing two strings
  */
 #define ASSERT_STRING_EQUAL(actual, desired) do {\
-    if (actual == desired) {               \
+    if (strcmp(actual, desired) == 0) {    \
         MSG_OK; PASSED++; TOTAL++;         \
     } else {                               \
         MSG_FAIL;                          \
